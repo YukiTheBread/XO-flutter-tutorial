@@ -16,52 +16,55 @@ class _OXBoardState extends State<OXBoard> {
   bool _isGameOver = false;
   String? _winnerType;
 
-  static const double _markSize = 100.0;
-  static const int _gridSize = 3;
+  static const double _markSize = 400.0/_gridSize;
+  static const int _gridSize = 5; // Define grid size consistently
   static const String _emptyCell = '-';
 
-  List<String> _getMovesList() {
+  /// Converts the current [_marks] list into a 2D list representing the grid state.
+  List<List<String>> _getMovesList() {
     final int n = _gridSize;
-    List<String> moves = List<String>.filled(n * n, _emptyCell);
+    List<List<String>> moves = List<List<String>>.generate(
+      n,
+      (int row) => List<String>.filled(n, _emptyCell),
+    );
 
     for (final Mark mark in _marks) {
-      moves[mark.row * n + mark.col] = mark.type;
+      moves[mark.row][mark.col] = mark.type;
     }
     return moves;
   }
 
   bool _checkWinner() {
     final int n = _gridSize;
-    final List<String> moves = _getMovesList();
+    final List<List<String>> moves = _getMovesList();
 
     // Check rows
     for (int r = 0; r < n; r++) {
-      String first = moves[r * n];
+      String first = moves[r][0];
       if (first != _emptyCell &&
-          List.generate(n, (c) => moves[r * n + c]).every((v) => v == first)) {
+          List.generate(n, (c) => moves[r][c]).every((v) => v == first)) {
         return true;
       }
     }
 
     // Check columns
     for (int c = 0; c < n; c++) {
-      String first = moves[c];
+      String first = moves[0][c];
       if (first != _emptyCell &&
-          List.generate(n, (r) => moves[r * n + c]).every((v) => v == first)) {
+          List.generate(n, (r) => moves[r][c]).every((v) => v == first)) {
         return true;
       }
     }
 
     // Main diagonal
-    if (moves[0] != _emptyCell &&
-        List.generate(n, (i) => moves[i * (n + 1)]).every((v) => v == moves[0])) {
+    if (moves[0][0] != _emptyCell &&
+        List.generate(n, (i) => moves[i][i]).every((v) => v == moves[0][0])) {
       return true;
     }
 
     // Anti-diagonal
-    if (moves[n - 1] != _emptyCell &&
-        List.generate(n, (i) => moves[i * n + (n - 1 - i)])
-            .every((v) => v == moves[n - 1])) {
+    if (moves[n - 1][0] != _emptyCell &&
+        List.generate(n, (i) => moves[i][n - 1 - i]).every((v) => v == moves[n - 1][0])) {
       return true;
     }
 

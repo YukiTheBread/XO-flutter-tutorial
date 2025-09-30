@@ -53,26 +53,6 @@ class ToolButtons extends StatelessWidget {
             textStyle: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
-        ElevatedButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.save),
-          label: const Text('Quick Save'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.grey.shade200,
-            foregroundColor: Colors.grey.shade800,
-            textStyle: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-        ElevatedButton.icon(
-          onPressed: () {},
-          icon: const Icon(Icons.restore),
-          label: const Text('Quick Load'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.grey.shade200,
-            foregroundColor: Colors.grey.shade800,
-            textStyle: const TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
       ],
     );
   }

@@ -36,12 +36,12 @@ class BoardPainter extends CustomPainter {
     }
 
     final Paint oPaint = Paint()
-      ..color = Colors.blue
+      ..color = Colors.green
       ..strokeWidth = 6
       ..style = PaintingStyle.stroke;
 
     final Paint xPaint = Paint()
-      ..color = Colors.red
+      ..color = Colors.yellow
       ..strokeWidth = 6
       ..style = PaintingStyle.stroke;
 
